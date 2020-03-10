@@ -11,3 +11,4 @@ export function getHomeGoodsData(type,page) {
       params:{type,page}
     })
 }
+
