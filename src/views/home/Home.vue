@@ -64,7 +64,7 @@
         mounted() {
           const refresh = debounce(this.$refs.scroll.refreshHeight)
           //事件总线  这里要用箭头函数
-          this.$bus.$on("itemImageLoad",()=>{
+          this.$bus.$on("homeItemImageLoad",()=>{
               refresh()
           })
         },

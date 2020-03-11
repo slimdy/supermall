@@ -17,25 +17,40 @@ const routes = [
   },
   {
     path: "/home",
-    component:Home
+    component:Home,
+    meta:{
+      show:true
+    }
   },
   {
     path: "/category",
-    component:Category
+    component:Category,
+    meta:{
+      show:true
+    }
   }
   ,
   {
     path: "/cart",
-    component:Cart
+    component:Cart,
+    meta:{
+      show:true
+    }
   }
   ,
   {
     path: "/profile",
-    component:Profile
+    component:Profile,
+    meta:{
+      show:true
+    }
   },
   {
     path: "/detail/:id",
-    component:Detail
+    component:Detail,
+    meta:{
+      show:false
+    }
   }
 ]
 

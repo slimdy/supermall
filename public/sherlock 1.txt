@@ -393,3 +393,31 @@
 293 agonize v 苦苦思索
 294 reflective adj 反射的  沉思的
 
+295 paramedic n 非医生护士的 护理人员  pairuomaidic
+296 crack v 使破裂 裂开 垮掉 n 裂缝  爆裂声  adj  第一流的
+297 marksman  n 神射手
+298 acclimatize v 适应 习惯  a klai me taizi   美国写作 acclimate   ak le meit
+299 moral  n 道德 品德  adj  道德上的
+230 trail n  林间小道   踪迹  v 拖 拉 无精打采的走 追踪  trail off 声音逐渐减小
+231 innocently  adj 故作天真无邪的 佯装无知的
+232 bundle n 一束 一捆 v  推搡 乱塞
+233 toss v  随意扔，抛   搅拌  向后甩
+234 dreadful adj  可怕的 糟糕的  zhuaideful
+235 utter v 说 讲 出声  adj  完全的 十足的，极度的
+236 powder n 粉末 ，同gunpowder 火药味 v 往...涂粉
+237 reassure  v 使安心 打消...疑虑 re a sure
+238 bide v 等待时机
+239 gauge  v 测量 判断  n 测量仪器，口径
+240 summon v 召唤  鼓起勇气 振作
+241 aggressive  adj  好斗的 挑衅的 具有攻击性的
+242 odd  adj  奇怪的 奇数的 不成对的 单数的  oddly enough  说来奇怪
+243 petty adj  琐碎的  微不足道的 paity
+244 feud  n  世仇 积怨 长期争执
+245 disparaging adj 贬低的 轻蔑的
+246 mastermind n 幕后操纵者
+247 occupy  v 占有  占用 占据  o  kiu  pai
+248 freelance adj  自由职业的  独立的  n  自由职业者
+249  resentful  adj  充满怨恨的
+240 throughout   自始至终 ，从头到尾
+241 surveillance  n  监控，盯梢
+

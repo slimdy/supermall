@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item" @click="itemClick">
-    <img :src="good.hasOwnProperty('show') ? good.show.image : good.image" alt="" @load="imageLoad">
+    <img :src="showImage" alt="" @load="imageLoad">
     <div class="goods-info">
       <p>{{good.title}}</p>
       <span class="price">{{good.price}}</span>
@@ -20,14 +20,30 @@
             }
           }
         },
+        computed:{
+          showImage(){
+
+             return  this.good.image || this.good.img|| this.good.show.img
+          }
+        },
         methods:{
           imageLoad(){
-            this.$bus.$emit('itemImageLoad')
+            if (this.$route.path.indexOf("/home") !== -1){
+              this.$bus.$emit('homeItemImageLoad')
+            }else{
+              this.$bus.$emit('detailItemImageLoad')
+            }
+
           },
           itemClick(){
-            this.$router.push("/detail/"+this.good.iid)
+            console.log(2223,this.good.iid)
+            console.log(2224,this.good.item_id)
+            let id = this.good.iid || this.good.item_id
+            console.log(2224,id)
+            this.$router.push("/detail/"+ id).catch(err=>err)
           }
-        }
+        },
+
     }
 </script>
 
