@@ -32,7 +32,7 @@
             this.$emit("titleClick",index)
           },
           back(){
-            this.$router.back()
+            this.$router.push("/home")
           }
         }
 

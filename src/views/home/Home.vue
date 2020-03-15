@@ -18,7 +18,6 @@
   import TabControl from "components/content/tabControl/TabControl";
   import Scroll from "components/common/scroll/Scroll";
   import GoodsList from "components/content/goods/GoodsList";
-  import BackTop from "components/content/backTop/BackTop";
   import HomeSwiper from "./childcomps/HomeSwiper";
   import HomeRecommend from "./childcomps/HomeRecommend";
   import HomeFeature from "./childcomps/HomeFeature";
@@ -26,17 +25,18 @@
 
   import {getHomeMultidata,getHomeGoodsData} from "network/home";
   import {debounce} from "../../common/utils";
+  import {backTopMixin} from "../../common/mixin";
 
 
   export default {
         name: "Home",
+        mixins:[backTopMixin],
         data(){
           return{
             currentType:"pop",
             banner:[],
             recommend:[],
             titles:["流行","新款","精选"],
-            isShow:false,
             isTabFixed:false,
             goods:{
               pop:{page:0,list:[]},
@@ -53,7 +53,7 @@
             }
         },
         components:{
-            NavBar,TabControl,Scroll,GoodsList,BackTop,HomeSwiper,HomeRecommend,HomeFeature,
+            NavBar,TabControl,Scroll,GoodsList,HomeSwiper,HomeRecommend,HomeFeature,
         },
         created() {
            this.handleHomeMultiData()
@@ -69,11 +69,16 @@
           })
         },
         activated() {
-          this.$refs.scroll.scrollTo(0,this.saveY,0)
+          console.log("进来时",this.saveY)
+          this.$refs.scroll.scrollTo(0,this.saveY,1000)
           this.$refs.scroll.refreshHeight()
+
         },
+
         deactivated() {
-              this.saveY = this.$refs.scroll.getScrollY()
+
+          this.saveY = this.$refs.scroll.getScrollY()
+          console.log("出去时",this.saveY)
         },
     methods:{
 
@@ -114,9 +119,7 @@
             this.$refs.tabControl1.currentIndex = index
             this.$refs.tabControl.currentIndex = index
           },
-          backTopClick(){
-            this.$refs.scroll.scrollTo(0,0)
-          },
+
           contentScroll(position){
             //回到顶部 是否显示
             this.isShow = Math.abs(position.y) >1000

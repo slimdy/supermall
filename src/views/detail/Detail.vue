@@ -10,6 +10,8 @@
       <detail-comment-info ref="comment" :comment-info="commentInfo"/>
       <detail-recommend-info ref="recommend" :recommend-list="recommendList"/>
     </scroll>
+    <detail-bottom-bar @addToCart="addToCart"/>
+    <back-top @click.native="backTopClick" v-show="isShow"/>
   </div>
 </template>
 
@@ -23,14 +25,17 @@
     import DetailParamInfo from "./childDetails/DetailParamInfo";
     import DetailCommentInfo from "./childDetails/DetailCommentInfo";
     import DetailRecommendInfo from "./childDetails/DetailRecommendInfo";
+    import DetailBottomBar from "./childDetails/DetailBottomBar";
 
     import {getGoodDetail,Goods,Shop,GoodsParam,getRecommend} from "network/detail";
     import {debounce} from "common/utils";
+    import {backTopMixin} from "common/mixin";
 
     export default {
         name: "Detail",
+        mixins:[backTopMixin],
         components:{Scroll,DetailNavBar,DetailSwiper,DetailBaseInfo,DetailShopInfo,DetailGoodInfo,DetailParamInfo,
-          DetailCommentInfo,DetailRecommendInfo},
+          DetailCommentInfo,DetailRecommendInfo,DetailBottomBar},
         data(){
           return {
             iid:null,
@@ -93,17 +98,26 @@
 
                 this.anchorY = []
                 this.anchorY.push(0)
-                this.anchorY.push(this.$refs.param.$el.offsetTop)
-                this.anchorY.push(this.$refs.comment.$el.offsetTop)
-                this.anchorY.push(this.$refs.recommend.$el.offsetTop)
+                this.$refs.param && this.anchorY.push(this.$refs.param.$el.offsetTop)
+                this.$refs.comment && this.anchorY.push(this.$refs.comment.$el.offsetTop)
+                this.$refs.recommend && this.anchorY.push(this.$refs.recommend.$el.offsetTop)
                 console.log(this.anchorY)
-              },200)
+              },1000)
             },
             goodsImageLoad(){
 
               this.refresh()
               this.getAnchorY()
               // this.$refs.scroll.refreshHeight()
+            },
+            getGood(){
+              return {
+                image:this.topImages[0],
+                title:this.goods.title,
+                desc:this.goods.desc,
+                price:this.goods.nowPrice,
+                id:this.iid
+              }
             },
             titleClick(index){
               this.$refs.scroll.scrollTo(0,-this.anchorY[index],200)
@@ -119,7 +133,16 @@
                       this.$refs.nav.currentIndex = i
                   }
                 }
+              //回到顶部 是否显示
+              this.isShow = positionY >1000
 
+            },
+            addToCart(){
+             const product = this.getGood()
+              product.quantity = 1
+              this.$store.dispatch('addCart',product).then(data=>{
+                
+              })
             }
           },
         watch:{
@@ -135,8 +158,7 @@
     overflow: hidden;
     position: absolute;
     top: 44px;
-    /*bottom: 49px;*/
-    bottom: 0;
+    bottom: 49px;
     left: 0;
     right: 0;
   }
