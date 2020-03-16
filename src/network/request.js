@@ -1,6 +1,6 @@
 import axios from 'axios'
 const baseConfig = {
-  baseURL:"http://123.207.32.32:8000/api/wh",
+  baseURL:"http://123.207.32.32:8000/",
   // baseURL:"http://106.54.54.237:8000/api/wh",
   timeout:5000
 }
