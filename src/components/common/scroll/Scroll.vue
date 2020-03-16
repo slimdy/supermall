@@ -56,7 +56,6 @@
               })
             },
             refreshHeight(){
-              console.log("----")
               this.scroll.refresh()
             },
             getScrollY(){

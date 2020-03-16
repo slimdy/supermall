@@ -15,7 +15,6 @@ export default new Vuex.Store({
     [ADD_CART_OBJ](state,payload){
       const id = payload.id
       payload.checked = false
-      console.log(payload)
       Vue.set(state.cartList,id,payload)
     },
     changeChecked(state,payload){

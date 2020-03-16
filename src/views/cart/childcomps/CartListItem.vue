@@ -32,7 +32,6 @@
         },
         methods:{
           checkedChange(){
-            // console.log( this.$refs.button.checked)
             this.$store.commit("changeChecked",{id:this.itemInfo.id})
           }
         }

@@ -26,6 +26,7 @@
     import DetailCommentInfo from "./childDetails/DetailCommentInfo";
     import DetailRecommendInfo from "./childDetails/DetailRecommendInfo";
     import DetailBottomBar from "./childDetails/DetailBottomBar";
+    import { Toast,Indicator } from 'mint-ui';
 
     import {getGoodDetail,Goods,Shop,GoodsParam,getRecommend} from "network/detail";
     import {debounce} from "common/utils";
@@ -69,27 +70,47 @@
         methods:{
             /*网络请求*/
             handleDetailData(){
-              getGoodDetail(this.iid).then(res=>{
-                const data = res.result
-                console.log(data);
+              Indicator.open({
+                text: '加载中...',
+                spinnerType: 'fading-circle'
+              });
+              // getGoodDetail(this.iid).then(res=>{
+              //   const data = res.result
+              //   console.log(data);
+              //   this.topImages= data.itemInfo.topImages
+              //   this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
+              //   this.shop = new Shop(data.shopInfo)
+              //   this.detailInfo = data.detailInfo,
+              //   this.paramInfo  = new GoodsParam(data.itemParams.info,data.itemParams.rule)
+              //   if (data.rate.cRate !== 0){
+              //     this.commentInfo = data.rate.list[0]
+              //   }
+              //
+              // }).catch(err=>console.log(err))
+              //
+              //
+              // getRecommend(this.iid).then(res=>{
+              //   const data = res.data
+              //
+              //   console.log(data.list);
+              //   this.recommendList = data.list
+              // }).catch(err=>console.log(err))
+              Promise.all([getGoodDetail(this.iid),getRecommend(this.iid)]).then(values=>{
+                //这个是detailData
+                const data = values[0].result
+
                 this.topImages= data.itemInfo.topImages
                 this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
                 this.shop = new Shop(data.shopInfo)
                 this.detailInfo = data.detailInfo,
-                this.paramInfo  = new GoodsParam(data.itemParams.info,data.itemParams.rule)
+                  this.paramInfo  = new GoodsParam(data.itemParams.info,data.itemParams.rule)
                 if (data.rate.cRate !== 0){
                   this.commentInfo = data.rate.list[0]
                 }
-
+                //这个是recommend
+                this.recommendList = values[1].data.list
+                Indicator.close()
               }).catch(err=>console.log(err))
-
-
-              getRecommend(this.iid).then(res=>{
-                const data = res.data
-                console.log(data.list);
-                this.recommendList = data.list
-              }).catch(err=>console.log(err))
-
               // this.$nextTick()  这个方法是每次把数据赋值给组件后 组件需要等待一个周期才能渲染，
               // 把相应操作函数 放在里面作为渲染完成后的回调，这样可以做出相应的操作
 
@@ -101,7 +122,6 @@
                 this.$refs.param && this.anchorY.push(this.$refs.param.$el.offsetTop)
                 this.$refs.comment && this.anchorY.push(this.$refs.comment.$el.offsetTop)
                 this.$refs.recommend && this.anchorY.push(this.$refs.recommend.$el.offsetTop)
-                console.log(this.anchorY)
               },1000)
             },
             goodsImageLoad(){
@@ -141,7 +161,11 @@
              const product = this.getGood()
               product.quantity = 1
               this.$store.dispatch('addCart',product).then(data=>{
-                
+                Toast({
+                  message: data,
+                  position: 'middle',
+                  duration: 1000
+                });
               })
             }
           },

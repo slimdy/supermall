@@ -69,7 +69,6 @@
           })
         },
         activated() {
-          console.log("进来时",this.saveY)
           this.$refs.scroll.scrollTo(0,this.saveY,1000)
           this.$refs.scroll.refreshHeight()
 
@@ -78,7 +77,6 @@
         deactivated() {
 
           this.saveY = this.$refs.scroll.getScrollY()
-          console.log("出去时",this.saveY)
         },
     methods:{
 
@@ -127,7 +125,6 @@
             this.isTabFixed = Math.abs(position.y) > this.tabOffsetTop
           },
           uploadMore(){
-            console.log("上拉加载更多")
             this.handleHomeGoodsData(this.currentType)
           },
           swiperImageLoad(){

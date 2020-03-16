@@ -36,10 +36,7 @@
 
           },
           itemClick(){
-            console.log(2223,this.good.iid)
-            console.log(2224,this.good.item_id)
             let id = this.good.iid || this.good.item_id
-            console.log(2224,id)
             this.$router.push("/detail/"+ id).catch(err=>err)
           }
         },
